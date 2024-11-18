@@ -1,4 +1,4 @@
-import { DataTypes, Model, Sequelize, Optional } from 'sequelize';
+import { DataTypes, Model, Sequelize, Optional, BelongsToManyGetAssociationsMixin, BelongsToManyAddAssociationsMixin } from 'sequelize';
 
 interface UserAttributes {
   id: number;
@@ -14,6 +14,9 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   public name!: string;
   public universityId!: number;
   public email!: string;
+
+  declare getSubjects: BelongsToManyGetAssociationsMixin<User>;
+  declare addSubjects: BelongsToManyAddAssociationsMixin<User, object>;
 }
 
 export const UserModel = (sequelize: Sequelize) => {
